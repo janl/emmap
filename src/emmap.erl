@@ -25,18 +25,19 @@
 -type mmap_file() :: #file_descriptor{}.
 
 init() ->
-    case code:priv_dir(emmap) of
-        {error, bad_name} ->
-            case code:which(?MODULE) of
-                Filename when is_list(Filename) ->
-                    Dir    = filename:dirname(filename:dirname(Filename)),
-                    SoName = filename:join([Dir, "priv", "emmap_nifs"]);
-                _ ->
-                    SoName = filename:join("../priv", "emmap_nifs")
-            end;
-        Dir ->
-            SoName = filename:join(Dir, "emmap_nifs")
-    end,
+    % case code:priv_dir(emmap) of
+    %     {error, bad_name} ->
+    %         case code:which(?MODULE) of
+    %             Filename when is_list(Filename) ->
+    %                 Dir    = filename:dirname(filename:dirname(Filename)),
+    %                 SoName = filename:join([Dir, "priv", "emmap_nifs"]);
+    %             _ ->
+    %                 SoName = filename:join("../priv", "emmap_nifs")
+    %         end;
+    %     Dir ->
+    %         SoName = filename:join(Dir, "emmap_nifs")
+    % end,
+    SoName = "./emmap_nifs",
     erlang:load_nif(SoName, 0).
 
 
